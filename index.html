@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Video Downloader - Watch & Download Videos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🎬 Video Hub</div>
+            <div class="nav-links">
+                <a href="#home" onclick="navigateTo('home')">Home</a>
+                <a href="#about" onclick="navigateTo('about')">About</a>
+                <a href="#help" onclick="navigateTo('help')">Help</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="hero-section">
+            <div class="container">
+                <h1 class="main-title">🎬 Video Downloader</h1>
+                <p class="subtitle">Download & Watch videos from anywhere</p>
+                
+                <div class="search-box">
+                    <form id="urlForm" onsubmit="handleFormSubmit(event)">
+                        <input 
+                            type="text" 
+                            id="videoUrl" 
+                            class="url-input" 
+                            placeholder="Paste video URL here..."
+                            required
+                            autocomplete="off"
+                        />
+                        <button type="submit" class="search-btn">🚀 Fetch & Play</button>
+                    </form>
+                </div>
+
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">▶️</div>
+                        <h3>Play Instantly</h3>
+                        <p>Watch videos directly in your browser without waiting</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>Download Videos</h3>
+                        <p>Save videos in the best quality with one click</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Multi-Platform</h3>
+                        <p>Works with YouTube, Instagram, TikTok, and many more</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Fast & Reliable</h3>
+                        <p>Advanced extraction methods for best compatibility</p>
+                    </div>
+                </div>
+
+                <!-- <div class="supported-platforms">
+                    <h3>Supported Platforms:</h3>
+                    <div class="platform-badges">
+                        <span class="platform-badge">YouTube</span>
+                        <span class="platform-badge">Instagram</span>
+                        <span class="platform-badge">TikTok</span>
+                        <span class="platform-badge">Twitter/X</span>
+                        <span class="platform-badge">Facebook</span>
+                        <span class="platform-badge">Reddit</span>
+                        <span class="platform-badge">Terabox</span>
+                        <span class="platform-badge">And More...</span>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Info/Results Page -->
+    <div id="infoPage" class="page">
+        <div class="container">
+            <div class="player-header">
+                <button class="back-btn" onclick="navigateTo('home')">← Back to Home</button>
+                <h2>Video Information</h2>
+            </div>
+            
+            <div id="infoContent" class="info-content">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Processing your video...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Player Page -->
+    <div id="playerPage" class="page">
+        <div class="player-wrapper">
+            <div class="player-header-bar">
+                <button class="back-btn-player" onclick="navigateTo('home')">← Home</button>
+                <h3 id="playerTitle" class="player-title">Video Player</h3>
+            </div>
+            
+            <div class="video-player-container">
+                <video id="videoPlayer" class="video-player" controls autoplay>
+                    <source id="videoSource" src="" type="video/mp4">
+                    Your browser doesn't support HTML5 video playback.
+                </video>
+            </div>
+
+            <div class="player-controls">
+                <button class="control-btn" onclick="playVideo()">▶ Play</button>
+                <button class="control-btn" onclick="pauseVideo()">⏸ Pause</button>
+                <button class="control-btn" onclick="toggleFullscreen()">🖥 Fullscreen</button>
+                <button class="control-btn" onclick="downloadCurrentVideo()">💾 Download</button>
+                <button class="control-btn" onclick="shareVideo()">📤 Share</button>
+            </div>
+
+            <div class="player-info">
+                <p id="playerInfo" class="info-text">Right-click on video and select "Save Video As" to download</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <div class="container">
+            <h2>About Video Downloader</h2>
+            <div class="info-box">
+                <h3>What is this?</h3>
+                <p>Universal Video Downloader is a powerful web-based tool that allows you to download and play videos from various platforms directly in your browser.</p>
+                
+                <h3>Features:</h3>
+                <ul>
+                    <li>🎬 Play videos directly without downloading</li>
+                    <li>💾 Download videos in multiple formats</li>
+                    <li>🌍 Support for 50+ websites</li>
+                    <li>⚡ Fast and reliable extraction</li>
+                    <li>🔐 No registration required</li>
+                </ul>
+
+                <h3>Supported Platforms:</h3>
+                <ul>
+                    <li>YouTube</li>
+                    <li>Instagram</li>
+                    <li>TikTok</li>
+                    <li>Twitter / X</li>
+                    <li>Facebook</li>
+                    <li>Reddit</li>
+                    <li>Terabox</li>
+                    <li>And many more...</li>
+                </ul>
+            </div>
+            <button class="back-btn" onclick="navigateTo('home')">← Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Help Page -->
+    <div id="help" class="page">
+        <div class="container">
+            <h2>Help & FAQ</h2>
+            <div class="info-box">
+                <h3>How to use?</h3>
+                <ol>
+                    <li>Copy the URL of the video you want to download</li>
+                    <li>Paste it in the input box on the home page</li>
+                    <li>Click "Fetch & Play" button</li>
+                    <li>Choose to play or download the video</li>
+                </ol>
+
+                <h3>What formats are supported?</h3>
+                <p>We support MP4, WebM, and other common video formats.</p>
+
+                <h3>Is it safe?</h3>
+                <p>Yes! Everything runs in your browser. No data is stored on our servers.</p>
+
+                <h3>Why doesn't it work for some videos?</h3>
+                <p>Some videos may be region-restricted or require authentication. Try downloading instead of playing.</p>
+
+                <h3>Can I use this on mobile?</h3>
+                <p>Yes! The app is fully responsive and works on all devices.</p>
+            </div>
+            <button class="back-btn" onclick="navigateTo('home')">← Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Universal Video Downloader. All rights reserved.</p>
+            <p>❤️ Made with love for video enthusiasts</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
